@@ -7,7 +7,7 @@
 #pragma once
 
 #include <string.h>
-#include <GL/glew.h>
+#include <OpenGL/glew.h>
 #include <GLFW/glfw3.h>
 
 #include <logger_component.h>
@@ -17,23 +17,23 @@
 
 namespace Rubeus
 {
-	namespace GraphicComponents
-	{
-		/**
+namespace GraphicComponents
+{
+/**
 		 * @enum	EWindowParameters
 		 *
 		 * @brief	Values that represent window parameters.
 		 * 			Use while constructing a RWindowComponent object
 		 */
-		enum class EWindowParameters
-		{
-			WINDOWED_MODE,
-			FULLSCREEN_MODE,
-			NON_RESIZABLE_WINDOW,
-			RESIZABLE_WINDOW
-		};
+enum class EWindowParameters
+{
+	WINDOWED_MODE,
+	FULLSCREEN_MODE,
+	NON_RESIZABLE_WINDOW,
+	RESIZABLE_WINDOW
+};
 
-		/**
+/**
 		 * @fn		void getGLFWErrorLog(int error, const char *description);
 		 *
 		 * @brief	Gets GLFW error logs
@@ -41,33 +41,33 @@ namespace Rubeus
 		 * @param	error	   	The error.
 		 * @param	description	The description.
 		 */
-		void getGLFWErrorLog(int error, const char *description);
+void getGLFWErrorLog(int error, const char *description);
 
-		/**
+/**
 		* @class	RWindowComponent
 		*
 		* @brief	A window component that bridges GLFW function calls to handle Rubeus game window.
 		*/
-		class RWindowComponent : public RMasterComponent
-		{
-		private:
-			/** @brief	GLFW Window object */
-			GLFWwindow * m_Window;
+class RWindowComponent : public RMasterComponent
+{
+  private:
+	/** @brief	GLFW Window object */
+	GLFWwindow *m_Window;
 
-			/** @brief	The width of the window */
-			int m_Width;
+	/** @brief	The width of the window */
+	int m_Width;
 
-			/** @brief	The height of the window */
-			int m_Height;
+	/** @brief	The height of the window */
+	int m_Height;
 
-			/** @brief	The title of the window */
-			const char * m_Title;
+	/** @brief	The title of the window */
+	const char *m_Title;
 
-		public:
-			/** @brief	Mouse positions */
-			static int m_X, m_Y;
+  public:
+	/** @brief	Mouse positions */
+	static int m_X, m_Y;
 
-			/**
+	/**
 			 * @fn		bool RWindowComponent::initWindow(const char *title, int width, int height, EWindowParameters windowMode = EWindowParameters::WINDOWED_MODE, EWindowParameters windowType = EWindowParameters::RESIZABLE_WINDOW);
 			 *
 			 * @brief	Initializes the Rubeus game window.
@@ -81,11 +81,10 @@ namespace Rubeus
 			 *
 			 * @return	True if it succeeds, false if it fails.
 			 */
-			bool initWindow(const char *title, int width, int height, EWindowParameters windowMode = EWindowParameters::WINDOWED_MODE, EWindowParameters windowType = EWindowParameters::RESIZABLE_WINDOW);
+	bool initWindow(const char *title, int width, int height, EWindowParameters windowMode = EWindowParameters::WINDOWED_MODE, EWindowParameters windowType = EWindowParameters::RESIZABLE_WINDOW);
 
-		public:
-
-			/**
+  public:
+	/**
 			 * @fn		RWindowComponent::RWindowComponent(const char *title, int width, int height, EWindowParameters windowMode = EWindowParameters::WINDOWED_MODE, EWindowParameters windowType = EWindowParameters::RESIZABLE_WINDOW, int setFPS);
 			 *
 			 * @brief	Constructor. Use enum EWindowParameters for windowMode and windowType
@@ -98,64 +97,64 @@ namespace Rubeus
 			 * @param	setFPS	  	The FPS. Default is 60fps.
 			 * 						Use 0 for unbound FPS, 1 for 60 FPS, 2 for 30 FPS, and likewise
 			 */
-			RWindowComponent(const char *title, int width, int height, EWindowParameters windowMode = EWindowParameters::WINDOWED_MODE, EWindowParameters windowType = EWindowParameters::RESIZABLE_WINDOW, int setFPS = 1);
+	RWindowComponent(const char *title, int width, int height, EWindowParameters windowMode = EWindowParameters::WINDOWED_MODE, EWindowParameters windowType = EWindowParameters::RESIZABLE_WINDOW, int setFPS = 1);
 
-			/**
+	/**
 			* @fn		RWindowComponent::~RWindowComponent();
 			*
 			* @brief		Destructor
 			*/
-			~RWindowComponent();
+	~RWindowComponent();
 
-			/**
+	/**
 			* @fn		void RWindowComponent::clearWindow();
 			*
 			* @brief		Clears the window with a color buffer
 			*/
-			void clearWindow();
+	void clearWindow();
 
-			/**
+	/**
 			* @fn		void RWindowComponent::updateWindow();
 			*
 			* @brief		Updates the window
 			* 			Polls GLFW for any changes
 			* 			Then swaps the buffers
 			*/
-			void updateWindow();
+	void updateWindow();
 
-			/**
+	/**
 			* @fn	bool RWindowComponent::closed();
 			*
 			* @brief	Queries if the window is closed
 			*
 			* @return	m_Closed.
 			*/
-			bool closed();
+	bool closed();
 
-			/**
+	/**
 			 * @fn		void RWindowComponent::setWindowTitle(const char * title);
 			 *
 			 * @brief	Sets window title
 			 *
 			 * @param 	title	The title.
 			 */
-			void setWindowTitle(const char * title);
+	void setWindowTitle(const char *title);
 
-			// TODO: Add docs
-			void setWindowIcon(RWindowComponent GameWindow, std::string names[]);
+	// TODO: Add docs
+	void setWindowIcon(RWindowComponent GameWindow, std::string names[]);
 
-			void setWindowIconToDefault();
+	void setWindowIconToDefault();
 
-			/**
+	/**
 			 * @fn		friend void RWindowComponent::windowCloseCallback(GLFWwindow * window);
 			 *
 			 * @brief	Callback, called when the window closes
 			 *
 			 * @param [in,out]	window	Pointer to GLFWwindow object being closed.
 			 */
-			friend void windowCloseCallback(GLFWwindow * window);
+	friend void windowCloseCallback(GLFWwindow *window);
 
-			/**
+	/**
 			 * @fn		friend void RWindowComponent::windowResizeCallback(GLFWwindow * window, int width, int height);
 			 *
 			 * @brief	Callback, called when the window resize
@@ -164,16 +163,17 @@ namespace Rubeus
 			 * @param 		  	width 	The width of the resized window.
 			 * @param 		  	height	The height of the resized window.
 			 */
-			friend void windowResizeCallback(GLFWwindow * window, int width, int height);
-		public:
-			//friend class RInputComponent;
-			// TODO: Add docs
-			static void cursorPositionCallback(GLFWwindow *window, double xpos, double ypos);
-			friend void mouseButtonCallback(GLFWwindow *window, int button, int action, int mods);
-			friend void scrollCallback(GLFWwindow *window, double xoffset, double yoffset);
-			friend void keyCallback(GLFWwindow *window, int key, int scancode, int action, int mods);
+	friend void windowResizeCallback(GLFWwindow *window, int width, int height);
 
-			/**
+  public:
+	//friend class RInputComponent;
+	// TODO: Add docs
+	static void cursorPositionCallback(GLFWwindow *window, double xpos, double ypos);
+	friend void mouseButtonCallback(GLFWwindow *window, int button, int action, int mods);
+	friend void scrollCallback(GLFWwindow *window, double xoffset, double yoffset);
+	friend void keyCallback(GLFWwindow *window, int key, int scancode, int action, int mods);
+
+	/**
 			 * @fn		void onMessage(Message * msg) override
 			 *
 			 * @brief	Handles the message received
@@ -181,9 +181,9 @@ namespace Rubeus
 			 *
 			 * @param	msg	The message object recieved.
 			 */
-			void onMessage(Message * msg) override;
+	void onMessage(Message *msg) override;
 
-		protected:
-		};
-	}
-}
+  protected:
+};
+} // namespace GraphicComponents
+} // namespace Rubeus

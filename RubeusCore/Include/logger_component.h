@@ -10,11 +10,11 @@
 #include <string.h>
 #include <string>
 
-#include <GL/glew.h>
+#include <OpenGL/glew.h>
 #include <IL/il.h>
 #include <IL/ilu.h>
 
- // TODO: Remove logger before shipping
+// TODO: Remove logger before shipping
 
 #ifndef LOGS
 
@@ -33,43 +33,48 @@
 
 #include <Windows.h>
 // Prints to console an error message that is passed in, in red
-#define ERRORLOG(x) SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);\
-                    LOGEXTENDED((x));\
-                    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7)
+#define ERRORLOG(x)                                               \
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12); \
+    LOGEXTENDED((x));                                             \
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7)
 
 // Prints to console an assertion that is passed in, in yellow
-#define ASSERT(x) SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 6);\
-									LOG((x));\
-									SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7)
+#define ASSERT(x)                                                \
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 6); \
+    LOG((x));                                                    \
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7)
 
-// Prints success message passed in, in green			
-#define SUCCESS(x) SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_GREEN | FOREGROUND_INTENSITY);\
-                   LOG((x));\
-                   SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7)
+// Prints success message passed in, in green
+#define SUCCESS(x)                                                                                     \
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_GREEN | FOREGROUND_INTENSITY); \
+    LOG((x));                                                                                          \
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7)
 
 // Pass in OpenGL calls for debugging errors while executing OpenGL code
-#define GLCall(x) GLClearError();\
-                  x;\
-                  while(GLenum error = glGetError())\
-                  {\
-                      int z = toHex(error);\
-                      ERRORLOG("OpenGL Error: 0x" + ((z < 0x1000)? "0" + std::to_string(z) : std::to_string(z)));\
-                      std::cin.get();\
-                  }
+#define GLCall(x)                                                                                    \
+    GLClearError();                                                                                  \
+    x;                                                                                               \
+    while (GLenum error = glGetError())                                                              \
+    {                                                                                                \
+        int z = toHex(error);                                                                        \
+        ERRORLOG("OpenGL Error: 0x" + ((z < 0x1000) ? "0" + std::to_string(z) : std::to_string(z))); \
+        std::cin.get();                                                                              \
+    }
 
 // Pass in DevIL calls for checking for errors in image management
-#define DevILCall(x) DevILClearError();\
-                     x;\
-                     while(ILenum error = ilGetError())\
-                     {\
-                         ERRORLOG(std::string("DevIL Error: ") + iluErrorString(error));\
-                         if(error == ILU_OUT_OF_MEMORY)\
-                         std::cin.get();\
-                     }
+#define DevILCall(x)                                                    \
+    DevILClearError();                                                  \
+    x;                                                                  \
+    while (ILenum error = ilGetError())                                 \
+    {                                                                   \
+        ERRORLOG(std::string("DevIL Error: ") + iluErrorString(error)); \
+        if (error == ILU_OUT_OF_MEMORY)                                 \
+            std::cin.get();                                             \
+    }
 #else
-	// In case non Windows system is the build target
+// In case non Windows system is the build target
 
-	// DO NOT USE
+// DO NOT USE
 #define ERRORLOG(x) LOGEXTENDED((x))
 
 // DO NOT USE
@@ -84,7 +89,7 @@
 // In case the build configuration is not "Debug"
 
 // Deprecated for non-debug builds
-#define LOG(x) std::cout << x <<std::endl;
+#define LOG(x) std::cout << x << std::endl;
 
 // Deprecated for non-debug builds
 #define LOGEXTENDED(x)

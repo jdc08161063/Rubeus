@@ -6,31 +6,30 @@
 
 #pragma once
 
-#include <GL/glew.h>
+#include <OpenGL/glew.h>
 
 #include <logger_component.h>
 
 namespace Rubeus
 {
-	namespace GraphicComponents
-	{
-		/**
+namespace GraphicComponents
+{
+/**
 		 * @class	RBuffer
 		 *
 		 * @brief	A buffer class that handles generating and binding OpenGL buffers.
 		 */
-		class RBuffer
-		{
-		private:
-			/** @brief	Identifier for the buffer, provided by OpenGL */
-			unsigned int m_BufferID;
+class RBuffer
+{
+  private:
+	/** @brief	Identifier for the buffer, provided by OpenGL */
+	unsigned int m_BufferID;
 
-			/** @brief	Number of elements in this buffer. */
-			unsigned int m_ElementCount;
+	/** @brief	Number of elements in this buffer. */
+	unsigned int m_ElementCount;
 
-		public:
-
-			/**
+  public:
+	/**
 			 * @fn		RBuffer::RBuffer(GLfloat * data, GLsizei count, GLuint elementCount);
 			 *
 			 * @brief	Constructor. Generates a buffer object and applies its layout.
@@ -39,37 +38,37 @@ namespace Rubeus
 			 * @param 		  	count		Number of total units of data values.
 			 * @param 		  	elementCount	Number of elements.
 			 */
-			RBuffer(GLfloat * data, GLsizei count, GLuint elementCount);
+	RBuffer(GLfloat *data, GLsizei count, GLuint elementCount);
 
-			/**
+	/**
 			 * @fn		RBuffer::~RBuffer();
 			 *
 			 * @brief	Destructor
 			 */
-			~RBuffer();
+	~RBuffer();
 
-			/**
+	/**
 			 * @fn		void RBuffer::bindBuffer() const;
 			 *
 			 * @brief	Binds this buffer
 			 */
-			void bindBuffer() const;
+	void bindBuffer() const;
 
-			/**
+	/**
 			 * @fn		void RBuffer::unbindBuffer() const;
 			 *
 			 * @brief	Unbinds buffer
 			 */
-			void unbindBuffer() const;
+	void unbindBuffer() const;
 
-			/**
+	/**
 			 * @fn		inline GLuint RBuffer::getElementCount()
 			 *
 			 * @brief	Gets number of elements in this buffer
 			 *
 			 * @return	The element count.
 			 */
-			inline GLuint getElementCount() { return m_ElementCount; }
-		};
-	}
-}
+	inline GLuint getElementCount() { return m_ElementCount; }
+};
+} // namespace GraphicComponents
+} // namespace Rubeus

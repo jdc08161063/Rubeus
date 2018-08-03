@@ -5,6 +5,7 @@ cmake_minimum_required (VERSION 3.8)
 
 link_directories(Dependencies/)
 link_directories(Source/)
+link_directories(OPENGL_LIBRARY_DIRS)
 
 file(GLOB_RECURSE SOURCES
     Source/*.cpp
@@ -24,6 +25,6 @@ add_executable (RubeusCore "RubeusCore.cpp" "RubeusCore.h" ${SOURCES})
 target_include_directories(RubeusCore PUBLIC ./Include)
 include_directories(${OPENGL_INCLUDE_DIRS})
 
-target_link_libraries(RubeusCore ${OPENGL_LIBRARIES})
+target_link_libraries(RubeusCore ${OPENGL_LIBRARIES} ${EXTRA_LIBS})
 
 # TODO: Add tests and install targets if needed.

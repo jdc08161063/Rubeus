@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include <GL\glew.h>
+#include <OpenGL/glew.h>
 #include <GLFW\glfw3.h>
 
 #include <window_component.h>
@@ -173,7 +173,7 @@ namespace Rubeus
 
 			glfwSetKeyCallback(m_Window, keyCallback);
 			glfwSetInputMode(m_Window, GLFW_STICKY_KEYS, 1);
-			
+
 
 			if(glewInit() != GLEW_OK)
 			{
